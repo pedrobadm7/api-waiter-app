@@ -13,6 +13,6 @@ export async function createCategory(req: Request, res: Response) {
     res.status(201).json(category);
   } catch (error) {
     console.log(error);
-    res.status(500);
+    res.sendStatus(500);
   }
 }
