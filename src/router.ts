@@ -1,39 +1,37 @@
 import { Router } from 'express';
+import { createCategory } from './app/useCases/categories/createCategory';
+import { listCategories } from './app/useCases/categories/listCategories';
 
 export const router = Router();
 
-router.get('/categories', (request, response) => {
-  response.send('OK');
+router.get('/categories', listCategories);
+
+router.post('/categories', createCategory);
+
+router.get('/products', (req, res) => {
+  res.send('OK');
 });
 
-router.post('/categories', (request, response) => {
-  response.send('OK');
+router.post('/products', (req, res) => {
+  res.send('OK');
 });
 
-router.get('/products', (request, response) => {
-  response.send('OK');
+router.get('/categories/:categoryId/products', (req, res) => {
+  res.send('OK');
 });
 
-router.post('/products', (request, response) => {
-  response.send('OK');
+router.get('/orders', (req, res) => {
+  res.send('OK');
 });
 
-router.get('/categories/:categoryId/products', (request, response) => {
-  response.send('OK');
+router.post('/orders', (req, res) => {
+  res.send('OK');
 });
 
-router.get('/orders', (request, response) => {
-  response.send('OK');
+router.patch('/orders/:orderId', (req, res) => {
+  res.send('OK');
 });
 
-router.post('/orders', (request, response) => {
-  response.send('OK');
-});
-
-router.patch('/orders/:orderId', (request, response) => {
-  response.send('OK');
-});
-
-router.delete('/orders/:orderId', (request, response) => {
-  response.send('OK');
+router.delete('/orders/:orderId', (req, res) => {
+  res.send('OK');
 });
