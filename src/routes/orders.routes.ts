@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { cancelOrder } from '../app/useCases/orders/cancelOrder';
-import { changeOrderStatus } from '../app/useCases/orders/changeOrderStatus';
-import { createOrder } from '../app/useCases/orders/createOrder';
-import { listOrders } from '../app/useCases/orders/listOrders';
+import { cancelOrder } from '../useCases/orders/cancelOrder';
+import { changeOrderStatus } from '../useCases/orders/changeOrderStatus';
+import { createOrder } from '../useCases/orders/createOrder';
+import { listOrders } from '../useCases/orders/listOrders';
 
 export const ordersRoutes = Router();
 

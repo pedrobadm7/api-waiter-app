@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
+import { io } from '../..';
 import { Order } from '../../models/Order';
-import { io } from '../../../index';
 
 export async function createOrder(req: Request, res: Response) {
   try {

@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import { Category } from '../../models/Category';
+import { CategoriesRepository } from '../../repositories/CategoriesRepository';
+
+const categoriesRepository = new CategoriesRepository();
 
 export async function createCategory(req: Request, res: Response) {
   try {
@@ -11,12 +13,9 @@ export async function createCategory(req: Request, res: Response) {
       });
     }
 
-    const category = await Category.create({
-      icon,
-      name,
-    });
+    categoriesRepository.create({ name, icon });
 
-    res.status(201).json(category);
+    res.status(201).send();
   } catch (error) {
     console.log(error);
     res.sendStatus(500);

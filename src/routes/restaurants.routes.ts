@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { ensureAuthenticated } from '../app/middleware/ensureAuthenticated';
-import { getRestaurantById } from '../app/useCases/restaurants/getRestaurantById';
-import { loginRestaurant } from '../app/useCases/restaurants/loginRestaurant';
-import { registerRestaurants } from '../app/useCases/restaurants/registerRestaurant';
+import { ensureAuthenticated } from '../middleware/ensureAuthenticated';
+import { getRestaurantById } from '../useCases/restaurants/getRestaurantById';
+import { loginRestaurant } from '../useCases/restaurants/loginRestaurant';
+import { registerRestaurants } from '../useCases/restaurants/registerRestaurant';
 
 export const restaurantsRoutes = Router();
 

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import multer from 'multer';
 import path from 'node:path';
-import { createProduct } from '../app/useCases/products/createProducts';
-import { listProducts } from '../app/useCases/products/listProducts';
+import { createProduct } from '../useCases/products/createProducts';
+import { listProducts } from '../useCases/products/listProducts';
 
 export const productsRoutes = Router();
 

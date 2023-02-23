@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { createCategory } from '../app/useCases/categories/createCategory';
-import { listCategories } from '../app/useCases/categories/listCategories';
-import { listProductsByCategory } from '../app/useCases/categories/listProductsByCategory';
+import { createCategory } from '../useCases/categories/createCategory';
+import { listCategories } from '../useCases/categories/listCategories';
+import { listProductsByCategory } from '../useCases/categories/listProductsByCategory';
 
 export const categoriesRoutes = Router();
 
