@@ -11,6 +11,10 @@ import { listOrders } from './app/useCases/orders/listOrders';
 import { createOrder } from './app/useCases/orders/createOrder';
 import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
 import { cancelOrder } from './app/useCases/orders/cancelOrder';
+import { registerRestaurants } from './app/useCases/restaurants/registerRestaurant';
+import { loginRestaurant } from './app/useCases/restaurants/loginRestaurant';
+import { getRestaurantById } from './app/useCases/restaurants/getRestaurantById';
+import { ensureAuthenticated } from './app/middleware/ensureAuthenticated';
 
 export const router = Router();
 
@@ -24,6 +28,12 @@ const upload = multer({
     },
   }),
 });
+
+router.post('/restaurants/register', registerRestaurants);
+
+router.post('/restaurants/login', loginRestaurant);
+
+router.get('/restaurants/:id', ensureAuthenticated, getRestaurantById);
 
 router.get('/categories', listCategories);
 

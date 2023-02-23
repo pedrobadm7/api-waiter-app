@@ -4,6 +4,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { router } from './router';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const port = 3001;
 
