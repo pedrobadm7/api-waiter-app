@@ -3,8 +3,9 @@ import http from 'node:http';
 import express from 'express';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
-import { router } from './router';
+
 import * as dotenv from 'dotenv';
+import { router } from './routes';
 
 dotenv.config();
 
