@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
-import { CategoryModel } from '../../models/Category';
+import { CategoriesRepository } from '../../repositories/CategoriesRepository';
+
+const categoriesRepository = new CategoriesRepository();
 
 export async function listCategories(req: Request, res: Response) {
   try {
-    const categories = await CategoryModel.find();
+    const categories = await categoriesRepository.list();
 
     res.json(categories);
   } catch (error) {
