@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CategoriesRepository } from '../../repositories/CategoriesRepository';
+import { CreateCategoryService } from '../../services/CreateCategoryService';
 
 const categoriesRepository = new CategoriesRepository();
 
@@ -7,19 +8,11 @@ export async function createCategory(req: Request, res: Response) {
   try {
     const { icon, name } = req.body;
 
-    const categoryAlreadyExists = await categoriesRepository.findByName(name);
+    const createCategoryService = new CreateCategoryService(
+      categoriesRepository
+    );
 
-    if (categoryAlreadyExists) {
-      return res.status(400).json({ error: 'Category Already Exists!' });
-    }
-
-    if (!name) {
-      return res.send(400).json({
-        error: 'Name is required',
-      });
-    }
-
-    categoriesRepository.create({ name, icon });
+    createCategoryService.execute({ name, icon });
 
     res.status(201).send();
   } catch (error) {

@@ -20,10 +20,11 @@ export class CategoriesRepository implements ICategoriesRepository {
     return categories;
   }
 
-  async findByName(name: string): Promise<ICategoryDTO[]> {
-    const categories = await CategoryModel.find({
+  async findByName(name: string): Promise<ICategoryDTO | null> {
+    const categories = await CategoryModel.findOne({
       name: { $regex: name, $options: 'i' },
     });
+
     return categories;
   }
 }
