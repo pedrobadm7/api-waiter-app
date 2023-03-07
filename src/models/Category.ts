@@ -1,11 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { ICreateCategoryDTO } from '../repositories/ICategoriesRepository';
 
-export interface ICategoryDTO {
-  name: string;
-  icon: string;
-}
-
-const CategorySchema = new Schema<ICategoryDTO>({
+const CategorySchema = new Schema<ICreateCategoryDTO>({
   name: {
     type: String,
     required: true,

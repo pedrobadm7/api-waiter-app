@@ -15,8 +15,7 @@ export async function createCategory(req: Request, res: Response) {
     createCategoryService.execute({ name, icon });
 
     res.status(201).send();
-  } catch (error) {
-    console.log(error);
+  } catch {
     res.sendStatus(500);
   }
 }
