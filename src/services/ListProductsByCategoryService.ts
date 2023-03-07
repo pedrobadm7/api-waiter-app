@@ -1,7 +1,7 @@
-import { ProductsRepository } from '../repositories/ProductsRepository';
+import { IProductsRepository } from '../repositories/IProductsRepository';
 
 class ListProductsByCategoryService {
-  constructor(private productsRepository: ProductsRepository) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute(categoryId: string) {
     const product = await this.productsRepository.listByCategory(categoryId);
