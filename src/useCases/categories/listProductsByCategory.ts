@@ -1,11 +1,18 @@
 import { Request, Response } from 'express';
-import { Product } from '../../models/Product';
+import { ProductsRepository } from '../../repositories/ProductsRepository';
+import { ListProductsByCategoryService } from '../../services/ListProductsByCategoryService';
+
+const productsRepository = new ProductsRepository();
 
 export async function listProductsByCategory(req: Request, res: Response) {
   try {
     const { categoryId } = req.params;
 
-    const products = await Product.find().where('category').equals(categoryId);
+    const listProductsByCategoryService = new ListProductsByCategoryService(
+      productsRepository
+    );
+
+    const products = await listProductsByCategoryService.execute(categoryId);
 
     res.json(products);
   } catch (error) {

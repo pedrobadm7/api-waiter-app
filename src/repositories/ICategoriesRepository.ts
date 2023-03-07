@@ -3,6 +3,8 @@ export interface ICreateCategoryDTO {
   icon: string;
 }
 
+export type ICategory = ICreateCategoryDTO;
+
 export interface ICategoriesRepository {
   findByName(name: string): Promise<ICreateCategoryDTO | null>;
   list(): Promise<ICreateCategoryDTO[]>;
