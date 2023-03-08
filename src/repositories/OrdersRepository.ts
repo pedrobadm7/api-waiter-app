@@ -11,4 +11,8 @@ export class OrderRepository implements IOrdersRepository {
   async cancel(orderId: string): Promise<void> {
     await Order.findByIdAndDelete(orderId);
   }
+
+  async update(orderId: string, status: string): Promise<void> {
+    await Order.findByIdAndUpdate(orderId, { status });
+  }
 }

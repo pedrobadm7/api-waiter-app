@@ -1,18 +1,19 @@
 import { Request, Response } from 'express';
-import { Order } from '../../models/Order';
+import { OrderRepository } from '../../repositories/OrdersRepository';
+import { ChangeOrderStatusService } from '../../services/ChangeOrderStatusService';
+
+const orderRepository = new OrderRepository();
 
 export async function changeOrderStatus(req: Request, res: Response) {
   try {
     const { orderId } = req.params;
     const { status } = req.body;
 
-    if (!['WAITING', 'IN_PRODUCTION', 'DONE'].includes(status)) {
-      return res.status(400).json({
-        error: 'Status should be one of these: WAITING, IN_PRODUCTION, DONE',
-      });
-    }
+    const changeOrderStatusService = new ChangeOrderStatusService(
+      orderRepository
+    );
 
-    await Order.findByIdAndUpdate(orderId, { status });
+    await changeOrderStatusService.execute(orderId, status);
 
     res.sendStatus(204);
   } catch (error) {
