@@ -13,8 +13,5 @@ export interface IOrder {
 export interface IOrdersRepository {
   findOrderById(orderId: string): Promise<IOrder | null>;
   cancel(orderId: string): Promise<void>;
-  update(
-    orderId: string,
-    status: 'WAITING' | 'IN_PRODUCTION' | 'DONE'
-  ): Promise<void>;
+  update(orderId: string, status: string): Promise<void>;
 }

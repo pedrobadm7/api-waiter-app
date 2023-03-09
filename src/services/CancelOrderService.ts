@@ -1,7 +1,7 @@
-import { OrderRepository } from '../repositories/OrdersRepository';
+import { IOrdersRepository } from '../repositories/IOrdersRepository';
 
 class CancelOrderService {
-  constructor(private ordersRepository: OrderRepository) {}
+  constructor(private ordersRepository: IOrdersRepository) {}
 
   async execute(orderId: string) {
     const order = await this.ordersRepository.findOrderById(orderId);
