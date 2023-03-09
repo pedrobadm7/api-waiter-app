@@ -1,25 +1,21 @@
 import { Request, Response } from 'express';
-import { io } from '../..';
-import { Order } from '../../models/Order';
+import { SocketIoProvider } from '../../providers/socketio-provider';
+import { OrderRepository } from '../../repositories/OrdersRepository';
+import { CreateOrderService } from '../../services/CreateOrderService';
+
+const orderRepository = new OrderRepository();
+const socketIoProvider = new SocketIoProvider();
 
 export async function createOrder(req: Request, res: Response) {
   try {
     const { table, products } = req.body;
 
-    if (!table) {
-      return res.send(400).json({
-        error: 'Table is required',
-      });
-    }
+    const createOrderService = new CreateOrderService(
+      orderRepository,
+      socketIoProvider
+    );
 
-    const order = await Order.create({
-      table,
-      products,
-    });
-
-    const orderDetails = await order.populate('products.product');
-
-    io.emit('orders@new', orderDetails);
+    const order = await createOrderService.execute(table, products);
 
     res.status(201).json(order);
   } catch (error) {

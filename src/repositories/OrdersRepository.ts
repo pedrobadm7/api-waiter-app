@@ -8,6 +8,15 @@ export class OrderRepository implements IOrdersRepository {
     return order;
   }
 
+  async create(table: string, products: IOrder['products']): Promise<IOrder> {
+    const order = await Order.create({
+      table,
+      products,
+    });
+    const orderDetails = await order.populate('products.product');
+    return orderDetails;
+  }
+
   async cancel(orderId: string): Promise<void> {
     await Order.findByIdAndDelete(orderId);
   }
