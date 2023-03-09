@@ -22,4 +22,5 @@ export interface IProductsRepository {
     category,
     ingredients,
   }: IProductList): Promise<IProductList>;
+  list(): Promise<IProductList[]>;
 }

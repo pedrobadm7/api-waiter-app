@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IProductList } from '../repositories/IProductsRepository';
-import { ProductsRepository } from '../repositories/ProductsRepository';
+import {
+  IProductList,
+  IProductsRepository,
+} from '../repositories/IProductsRepository';
 
 class CreateProductsService {
-  constructor(private productsRepository: ProductsRepository) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute({
     name,

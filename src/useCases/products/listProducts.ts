@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
-import { Product } from '../../models/Product';
+import { ProductsRepository } from '../../repositories/ProductsRepository';
+import { ListProductsService } from '../../services/ListProductsService';
+
+const productsRepository = new ProductsRepository();
 
 export async function listProducts(req: Request, res: Response) {
   try {
-    const products = await Product.find();
+    const listProductsService = new ListProductsService(productsRepository);
+
+    const products = await listProductsService.execute();
 
     res.json(products);
   } catch (error) {
