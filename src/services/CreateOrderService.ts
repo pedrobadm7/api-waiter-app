@@ -1,4 +1,3 @@
-import { io } from '..';
 import { SocketIoProvider } from '../providers/socketio-provider';
 import { IOrder, IOrdersRepository } from '../repositories/IOrdersRepository';
 
@@ -15,7 +14,7 @@ class CreateOrderService {
 
     const order = await this.ordersRepository.create(table, products);
 
-    io.emit('orders@new', order);
+    this.socketIoProvider.emit('orders@new', order);
   }
 }
 
