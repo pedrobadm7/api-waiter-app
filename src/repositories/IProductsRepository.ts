@@ -14,4 +14,12 @@ export interface IProductList extends Document {
 
 export interface IProductsRepository {
   listByCategory(categoryId: string): Promise<IProductList[]>;
+  create({
+    name,
+    description,
+    imagePath,
+    price,
+    category,
+    ingredients,
+  }: IProductList): Promise<IProductList>;
 }

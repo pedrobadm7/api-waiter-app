@@ -7,4 +7,24 @@ export class ProductsRepository implements IProductsRepository {
 
     return product;
   }
+
+  async create({
+    name,
+    description,
+    imagePath,
+    price,
+    category,
+    ingredients,
+  }: IProductList): Promise<IProductList> {
+    const product = await Product.create({
+      name,
+      description,
+      imagePath,
+      price: Number(price),
+      category,
+      ingredients: ingredients || [],
+    });
+
+    return product;
+  }
 }

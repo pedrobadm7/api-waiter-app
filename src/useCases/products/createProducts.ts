@@ -1,19 +1,27 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, Response } from 'express';
-import { Product } from '../../models/Product';
+import { IProductList } from '../../repositories/IProductsRepository';
+import { ProductsRepository } from '../../repositories/ProductsRepository';
+import { CreateProductsService } from '../../services/CreateProductsService';
+
+const productsRepository = new ProductsRepository();
 
 export async function createProduct(req: Request, res: Response) {
   try {
     const imagePath = req.file?.filename;
-    const { name, description, price, category, ingredients } = req.body;
+    const { name, description, price, category, ingredients }: IProductList =
+      req.body;
 
-    const product = await Product.create({
+    const createProductsService = new CreateProductsService(productsRepository);
+
+    const product = await createProductsService.execute({
       name,
       description,
       imagePath,
-      price: Number(price),
+      price,
       category,
-      ingredients: ingredients ? JSON.parse(ingredients) : [],
-    });
+      ingredients,
+    } as IProductList);
 
     res.status(201).json(product);
   } catch (error) {
