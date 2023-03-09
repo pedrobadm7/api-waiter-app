@@ -16,4 +16,5 @@ export interface IOrdersRepository {
   cancel(orderId: string): Promise<void>;
   update(orderId: string, status: string): Promise<void>;
   create(table: string, products: IOrder['products']): Promise<IOrder>;
+  list(): Promise<IOrder[]>;
 }

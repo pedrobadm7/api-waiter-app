@@ -24,4 +24,12 @@ export class OrderRepository implements IOrdersRepository {
   async update(orderId: string, status: string): Promise<void> {
     await Order.findByIdAndUpdate(orderId, { status });
   }
+
+  async list(): Promise<IOrder[]> {
+    const orders = await Order.find()
+      .sort({ createdAt: 1 })
+      .populate('products.product');
+
+    return orders;
+  }
 }

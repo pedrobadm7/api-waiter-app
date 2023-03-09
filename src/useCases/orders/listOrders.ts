@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
-import { Order } from '../../models/Order';
+import { OrderRepository } from '../../repositories/OrdersRepository';
+import { ListOrdersService } from '../../services/ListOrdersService';
+
+const ordersRepository = new OrderRepository();
 
 export async function listOrders(req: Request, res: Response) {
   try {
-    const orders = await Order.find()
-      .sort({ createdAt: 1 })
-      .populate('products.product');
+    const listOrdersService = new ListOrdersService(ordersRepository);
+
+    const orders = await listOrdersService.execute();
 
     res.json(orders);
   } catch (error) {
