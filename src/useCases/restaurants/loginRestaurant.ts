@@ -1,40 +1,24 @@
 import { Request, Response } from 'express';
-import { Restaurant } from '../../models/Restaurant';
-import bcrypt from 'bcrypt';
-import jwt, { Secret } from 'jsonwebtoken';
+import { BcryptProvider } from '../../providers/bcrypt-provider';
+import { JsonWebTokenProvider } from '../../providers/jsonwebtoken-provider';
+import { RestaurantsRepository } from '../../repositories/RestaurantsRepository';
+import { LoginRestaurantService } from '../../services/LoginRestaurantService';
+
+const restaurantsRepository = new RestaurantsRepository();
+const bcryptProvider = new BcryptProvider();
+const jsonWebTokenProvider = new JsonWebTokenProvider();
 
 export async function loginRestaurant(req: Request, res: Response) {
   try {
     const { email, password } = req.body;
 
-    if (!email) {
-      return res.status(422).json({ message: 'O email é obrigatório!' });
-    }
-
-    if (!password) {
-      return res.status(422).json({ message: 'A senha é obrigatória!' });
-    }
-
-    const restaurant = await Restaurant.findOne({ email: email });
-
-    if (!restaurant) {
-      return res.status(404).json({ message: 'Email ou senha inválidos!' });
-    }
-
-    const checkPassword = await bcrypt.compare(password, restaurant.password);
-
-    if (!checkPassword) {
-      return res.status(404).json({ message: 'Email ou senha inválidos!' });
-    }
-
-    const secret = process.env.SECRET;
-
-    const token = jwt.sign(
-      {
-        id: restaurant._id,
-      },
-      secret as Secret
+    const loginRestaurantService = new LoginRestaurantService(
+      restaurantsRepository,
+      bcryptProvider,
+      jsonWebTokenProvider
     );
+
+    const token = await loginRestaurantService.execute(email, password);
 
     res.status(200).json(token);
   } catch (error) {

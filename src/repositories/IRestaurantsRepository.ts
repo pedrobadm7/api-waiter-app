@@ -9,4 +9,11 @@ export interface IRestaurant {
 
 export interface IRestaurantsRepository {
   findById(id: string, arg: string): Promise<IRestaurant | null>;
+  findRestaurant(email: string): Promise<IRestaurant | null>;
+  getIdByEmail(email: string): Promise<Types.ObjectId | undefined>;
+  createRestaurant(
+    name: string,
+    email: string,
+    password: string
+  ): Promise<IRestaurant>;
 }
