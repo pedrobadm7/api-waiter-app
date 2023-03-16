@@ -1,14 +1,17 @@
 import { Request, Response } from 'express';
-import { Restaurant } from '../../models/Restaurant';
+import { RestaurantsRepository } from '../../repositories/RestaurantsRepository';
+import { GetRestaurantByIdService } from '../../services/GetRestaurantByIdService';
+
+const restaurantsRepository = new RestaurantsRepository();
 
 export async function getRestaurantById(req: Request, res: Response) {
   const { id } = req.params;
 
-  const restaurant = await Restaurant.findById(id, '-password');
+  const getRestaurantByIdService = new GetRestaurantByIdService(
+    restaurantsRepository
+  );
 
-  if (!restaurant) {
-    return res.status(404).json({ message: 'Usuário não encontrado' });
-  }
+  const restaurant = await getRestaurantByIdService.execute(id);
 
   return res.status(200).json(restaurant);
 }
