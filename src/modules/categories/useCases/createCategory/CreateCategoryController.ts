@@ -11,8 +11,7 @@ class CreateCategoryController {
       this.createCategoryService.execute({ name, icon });
 
       return res.status(201).send();
-    } catch (e) {
-      console.log(e);
+    } catch {
       return res.sendStatus(500);
     }
   }
