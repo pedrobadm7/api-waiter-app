@@ -1,22 +1,21 @@
 import { Request, Response } from 'express';
-import { CategoriesRepository } from '../../repositories/CategoriesRepository';
-
 import { CreateCategoryService } from './CreateCategoryService';
 
-const categoriesRepository = new CategoriesRepository();
+class CreateCategoryController {
+  constructor(private createCategoryService: CreateCategoryService) {}
 
-export async function CreateCategoryController(req: Request, res: Response) {
-  try {
-    const { icon, name } = req.body;
+  async handle(req: Request, res: Response): Promise<Response> {
+    try {
+      const { icon, name } = req.body;
 
-    const createCategoryService = new CreateCategoryService(
-      categoriesRepository
-    );
+      this.createCategoryService.execute({ name, icon });
 
-    createCategoryService.execute({ name, icon });
-
-    res.status(201).send();
-  } catch {
-    res.sendStatus(500);
+      return res.status(201).send();
+    } catch (e) {
+      console.log(e);
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { CreateCategoryController };

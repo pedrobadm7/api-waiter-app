@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { CreateCategoryController } from '../modules/categories/useCases/createCategory/CreateCategoryController';
+import { createCategoryController } from '../modules/categories/useCases/createCategory';
+
 import { ListCategoriesController } from '../modules/categories/useCases/listCategory/ListCategoriesController';
 import { ListProductsByCategoryController } from '../modules/categories/useCases/listProductsByCategory/ListProductsByCategoryController';
 
@@ -7,6 +8,8 @@ export const categoriesRoutes = Router();
 
 categoriesRoutes.get('/', ListCategoriesController);
 
-categoriesRoutes.post('/', CreateCategoryController);
+categoriesRoutes.post('/', (req, res) => {
+  return createCategoryController.handle(req, res);
+});
 
 categoriesRoutes.get('/:categoryId/products', ListProductsByCategoryController);
