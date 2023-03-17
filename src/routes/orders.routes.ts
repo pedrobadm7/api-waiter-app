@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { cancelOrder } from '../useCases/orders/cancelOrder';
-import { changeOrderStatus } from '../useCases/orders/changeOrderStatus';
-import { createOrder } from '../useCases/orders/createOrder';
-import { listOrders } from '../useCases/orders/listOrders';
+import { CancelOrderController } from '../modules/orders/useCases/cancelOrder/CancelOrderController';
+import { ChangeOrderStatusController } from '../modules/orders/useCases/changeOrderStatus/ChangeOrderStatusController';
+import { CreateOrderController } from '../modules/orders/useCases/createOrder/CreateOrderController';
+import { ListOrdersController } from '../modules/orders/useCases/listOrders/ListOrdersController';
 
 export const ordersRoutes = Router();
 
-ordersRoutes.get('/', listOrders);
+ordersRoutes.get('/', ListOrdersController);
 
-ordersRoutes.post('/', createOrder);
+ordersRoutes.post('/', CreateOrderController);
 
-ordersRoutes.patch('/:orderId', changeOrderStatus);
+ordersRoutes.patch('/:orderId', ChangeOrderStatusController);
 
-ordersRoutes.delete('/:orderId', cancelOrder);
+ordersRoutes.delete('/:orderId', CancelOrderController);
