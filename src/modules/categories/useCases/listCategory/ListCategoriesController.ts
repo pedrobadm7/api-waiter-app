@@ -1,18 +1,20 @@
 import { Request, Response } from 'express';
 import { CategoriesRepository } from '../../repositories/CategoriesRepository';
+
 import { ListCategoryService } from './ListCategoryService';
 
-const categoriesRepository = new CategoriesRepository();
+class ListCategoriesController {
+  constructor(private listCategoriesService: ListCategoryService) {}
 
-export async function ListCategoriesController(req: Request, res: Response) {
-  try {
-    const listCategoriesService = new ListCategoryService(categoriesRepository);
+  async handle(req: Request, res: Response): Promise<Response> {
+    try {
+      const categories = await this.listCategoriesService.execute();
 
-    const categories = await listCategoriesService.execute();
-
-    res.json(categories);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+      return res.json(categories);
+    } catch {
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { ListCategoriesController };
