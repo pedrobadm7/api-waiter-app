@@ -1,13 +1,20 @@
 import { Router } from 'express';
 import { ensureAuthenticated } from '../middleware/ensureAuthenticated';
-import { GetRestaurantByIdController } from '../modules/restaurants/useCases/getRestaurantById/GetRestaurantByIdController';
-import { LoginRestaurantController } from '../modules/restaurants/useCases/loginRestaurant/LoginRestaurantController';
-import { RegisterRestaurantsController } from '../modules/restaurants/useCases/registerRestaurant/RegisterRestaurantController';
+import { getRestaurantByIdController } from '../modules/restaurants/useCases/getRestaurantById';
+import { loginRestaurantController } from '../modules/restaurants/useCases/loginRestaurant';
+import { registerRestaurantController } from '../modules/restaurants/useCases/registerRestaurant';
+
 
 export const restaurantsRoutes = Router();
 
-restaurantsRoutes.post('/register', RegisterRestaurantsController);
+restaurantsRoutes.post('/register', (req, res) => {
+  return registerRestaurantController.handle(req, res);
+});
 
-restaurantsRoutes.post('/login', LoginRestaurantController);
+restaurantsRoutes.post('/login', (req, res) => {
+  return loginRestaurantController.handle(req, res);
+});
 
-restaurantsRoutes.get('/:id', ensureAuthenticated, GetRestaurantByIdController);
+restaurantsRoutes.get('/:id', ensureAuthenticated, (req, res) => {
+  return getRestaurantByIdController.handle(req, res);
+});

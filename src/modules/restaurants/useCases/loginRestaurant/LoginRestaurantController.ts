@@ -1,27 +1,19 @@
 import { Request, Response } from 'express';
-import { BcryptProvider } from '../../../../providers/bcrypt-provider';
-import { JsonWebTokenProvider } from '../../../../providers/jsonwebtoken-provider';
-import { RestaurantsRepository } from '../../repositories/RestaurantsRepository';
 import { LoginRestaurantService } from './LoginRestaurantService';
+class LoginRestaurantController {
+  constructor(private loginRestaurantService: LoginRestaurantService) {}
 
-const restaurantsRepository = new RestaurantsRepository();
-const bcryptProvider = new BcryptProvider();
-const jsonWebTokenProvider = new JsonWebTokenProvider();
+  async handle(req: Request, res: Response): Promise<Response> {
+    try {
+      const { email, password } = req.body;
 
-export async function LoginRestaurantController(req: Request, res: Response) {
-  try {
-    const { email, password } = req.body;
+      const token = await this.loginRestaurantService.execute(email, password);
 
-    const loginRestaurantService = new LoginRestaurantService(
-      restaurantsRepository,
-      bcryptProvider,
-      jsonWebTokenProvider
-    );
-
-    const token = await loginRestaurantService.execute(email, password);
-
-    res.status(200).json(token);
-  } catch (error) {
-    res.status(500).json({ message: 'Aconteceu um erro no servidor!' + error });
+      return res.status(200).json(token);
+    } catch {
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { LoginRestaurantController };

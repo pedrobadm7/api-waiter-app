@@ -1,18 +1,20 @@
 import { Request, Response } from 'express';
-import { RestaurantsRepository } from '../../repositories/RestaurantsRepository';
-
 import { GetRestaurantByIdService } from './GetRestaurantByIdService';
 
-const restaurantsRepository = new RestaurantsRepository();
+class GetRestaurantByIdController {
+  constructor(private getRestaurantByIdService: GetRestaurantByIdService) {}
 
-export async function GetRestaurantByIdController(req: Request, res: Response) {
-  const { id } = req.params;
+  async handle(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
 
-  const getRestaurantByIdService = new GetRestaurantByIdService(
-    restaurantsRepository
-  );
+    const restaurant = await this.getRestaurantByIdService.execute(id);
 
-  const restaurant = await getRestaurantByIdService.execute(id);
-
-  return res.status(200).json(restaurant);
+    try {
+      return res.status(200).json(restaurant);
+    } catch {
+      return res.sendStatus(500);
+    }
+  }
 }
+
+export { GetRestaurantByIdController };
