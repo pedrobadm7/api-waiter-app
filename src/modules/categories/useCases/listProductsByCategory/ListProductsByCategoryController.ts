@@ -1,26 +1,24 @@
 import { Request, Response } from 'express';
-import { ProductsRepository } from '../../../products/repositories/ProductsRepository';
-
 import { ListProductsByCategoryService } from './ListProductsByCategoryService';
 
-const productsRepository = new ProductsRepository();
+class ListProductsByCategoryController {
+  constructor(
+    private listProductsByCategoryService: ListProductsByCategoryService
+  ) {}
 
-export async function ListProductsByCategoryController(
-  req: Request,
-  res: Response
-) {
-  try {
-    const { categoryId } = req.params;
+  async handle(req: Request, res: Response): Promise<Response> {
+    try {
+      const { categoryId } = req.params;
 
-    const listProductsByCategoryService = new ListProductsByCategoryService(
-      productsRepository
-    );
+      const products = await this.listProductsByCategoryService.execute(
+        categoryId
+      );
 
-    const products = await listProductsByCategoryService.execute(categoryId);
-
-    res.json(products);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+      return res.json(products);
+    } catch {
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { ListProductsByCategoryController };

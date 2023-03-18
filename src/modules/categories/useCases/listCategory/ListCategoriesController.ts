@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
-import { CategoriesRepository } from '../../repositories/CategoriesRepository';
 
-import { ListCategoryService } from './ListCategoryService';
+import { ListCategoriesService } from './ListCategoryService';
 
 class ListCategoriesController {
-  constructor(private listCategoriesService: ListCategoryService) {}
+  constructor(private listCategoriesService: ListCategoriesService) {}
 
   async handle(req: Request, res: Response): Promise<Response> {
     try {

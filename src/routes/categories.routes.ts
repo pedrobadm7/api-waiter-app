@@ -1,16 +1,18 @@
 import { Router } from 'express';
 import { createCategoryController } from '../modules/categories/useCases/createCategory';
-import { listCategoryController } from '../modules/categories/useCases/listCategory';
-import { ListProductsByCategoryController } from '../modules/categories/useCases/listProductsByCategory/ListProductsByCategoryController';
+import { listCategoriesController } from '../modules/categories/useCases/listCategory';
+import { listProductsByCategoryController } from '../modules/categories/useCases/listProductsByCategory';
 
 export const categoriesRoutes = Router();
 
 categoriesRoutes.get('/', (req, res) => {
-  return listCategoryController.handle(req, res);
+  return listCategoriesController.handle(req, res);
 });
 
 categoriesRoutes.post('/', (req, res) => {
   return createCategoryController.handle(req, res);
 });
 
-categoriesRoutes.get('/:categoryId/products', ListProductsByCategoryController);
+categoriesRoutes.get('/:categoryId/products', (req, res) => {
+  return listProductsByCategoryController.handle(req, res);
+});

@@ -3,7 +3,7 @@ import {
   ICategory,
 } from '../../repositories/ICategoriesRepository';
 
-class ListCategoryService {
+class ListCategoriesService {
   constructor(private categoriesRepository: ICategoriesRepository) {}
 
   async execute(): Promise<ICategory[]> {
@@ -13,4 +13,4 @@ class ListCategoryService {
   }
 }
 
-export { ListCategoryService };
+export { ListCategoriesService };
