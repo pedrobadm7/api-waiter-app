@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import multer from 'multer';
 import path from 'node:path';
-import { CreateProductController } from '../modules/products/useCases/createProducts/CreateProductsController';
-import { ListProductsController } from '../modules/products/useCases/listProducts/ListProductsController';
+import { createProductsController } from '../modules/products/useCases/createProducts';
+import { listProductsController } from '../modules/products/useCases/listProducts';
 
 export const productsRoutes = Router();
 
@@ -17,6 +17,10 @@ const upload = multer({
   }),
 });
 
-productsRoutes.get('/', ListProductsController);
+productsRoutes.get('/', (req, res) => {
+  return listProductsController.handle(req, res);
+});
 
-productsRoutes.post('/', upload.single('image'), CreateProductController);
+productsRoutes.post('/', upload.single('image'), (req, res) => {
+  return createProductsController.handle(req, res);
+});

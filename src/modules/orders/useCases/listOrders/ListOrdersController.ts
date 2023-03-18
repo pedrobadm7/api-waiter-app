@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
-import { OrderRepository } from '../../repositories/OrdersRepository';
 import { ListOrdersService } from './ListOrdersService';
 
-const ordersRepository = new OrderRepository();
+class ListOrdersController {
+  constructor(private listOrdersService: ListOrdersService) {}
 
-export async function ListOrdersController(req: Request, res: Response) {
-  try {
-    const listOrdersService = new ListOrdersService(ordersRepository);
+  async handle(req: Request, res: Response) {
+    const orders = await this.listOrdersService.execute();
 
-    const orders = await listOrdersService.execute();
-
-    res.json(orders);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+    try {
+      return res.json(orders);
+    } catch {
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { ListOrdersController };

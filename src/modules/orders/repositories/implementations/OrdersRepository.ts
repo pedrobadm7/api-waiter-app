@@ -1,7 +1,16 @@
-import { Order } from '../model/Order';
-import { IOrder, IOrdersRepository } from './IOrdersRepository';
+import { Order } from '../../model/Order';
+import { IOrder, IOrdersRepository } from '../IOrdersRepository';
 
 export class OrderRepository implements IOrdersRepository {
+  private static INSTANCE: OrderRepository;
+
+  public static getInstance() {
+    if (!OrderRepository.INSTANCE) {
+      OrderRepository.INSTANCE = new OrderRepository();
+    }
+
+    return OrderRepository.INSTANCE;
+  }
   async findOrderById(orderId: string): Promise<IOrder | null> {
     const order = await Order.findById(orderId);
 

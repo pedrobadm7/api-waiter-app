@@ -1,23 +1,21 @@
 import { Request, Response } from 'express';
-import { OrderRepository } from '../../repositories/OrdersRepository';
 import { ChangeOrderStatusService } from './ChangeOrderStatusService';
 
-const orderRepository = new OrderRepository();
+class ChangeOrderStatusController {
+  constructor(private changeOrderStatusService: ChangeOrderStatusService) {}
 
-export async function ChangeOrderStatusController(req: Request, res: Response) {
-  try {
-    const { orderId } = req.params;
-    const { status } = req.body;
+  async handle(req: Request, res: Response) {
+    try {
+      const { orderId } = req.params;
+      const { status } = req.body;
 
-    const changeOrderStatusService = new ChangeOrderStatusService(
-      orderRepository
-    );
+      await this.changeOrderStatusService.execute(orderId, status);
 
-    await changeOrderStatusService.execute(orderId, status);
-
-    res.sendStatus(204);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+      return res.sendStatus(204);
+    } catch {
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { ChangeOrderStatusController };

@@ -1,26 +1,19 @@
 import { Request, Response } from 'express';
-import { SocketIoProvider } from '../../../../providers/socketio-provider';
-import { OrderRepository } from '../../repositories/OrdersRepository';
-
 import { CreateOrderService } from './CreateOrderService';
+class CreateOrderController {
+  constructor(private createOrderService: CreateOrderService) {}
 
-const orderRepository = new OrderRepository();
-const socketIoProvider = new SocketIoProvider();
-
-export async function CreateOrderController(req: Request, res: Response) {
-  try {
+  async handle(req: Request, res: Response) {
     const { table, products } = req.body;
 
-    const createOrderService = new CreateOrderService(
-      orderRepository,
-      socketIoProvider
-    );
+    const order = await this.createOrderService.execute(table, products);
 
-    const order = await createOrderService.execute(table, products);
-
-    res.status(201).json(order);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+    try {
+      return res.status(201).json(order);
+    } catch {
+      return res.sendStatus(500);
+    }
   }
 }
+
+export { CreateOrderController };

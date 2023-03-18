@@ -1,15 +1,23 @@
 import { Router } from 'express';
-import { CancelOrderController } from '../modules/orders/useCases/cancelOrder/CancelOrderController';
-import { ChangeOrderStatusController } from '../modules/orders/useCases/changeOrderStatus/ChangeOrderStatusController';
-import { CreateOrderController } from '../modules/orders/useCases/createOrder/CreateOrderController';
-import { ListOrdersController } from '../modules/orders/useCases/listOrders/ListOrdersController';
+import { cancelOrderController } from '../modules/orders/useCases/cancelOrder';
+import { changeOrderStatusController } from '../modules/orders/useCases/changeOrderStatus';
+import { createOrderController } from '../modules/orders/useCases/createOrder';
+import { listOrdersController } from '../modules/orders/useCases/listOrders';
 
 export const ordersRoutes = Router();
 
-ordersRoutes.get('/', ListOrdersController);
+ordersRoutes.get('/', (req, res) => {
+  return listOrdersController.handle(req, res);
+});
 
-ordersRoutes.post('/', CreateOrderController);
+ordersRoutes.post('/', (req, res) => {
+  return createOrderController.handle(req, res);
+});
 
-ordersRoutes.patch('/:orderId', ChangeOrderStatusController);
+ordersRoutes.patch('/:orderId', (req, res) => {
+  return changeOrderStatusController.handle(req, res);
+});
 
-ordersRoutes.delete('/:orderId', CancelOrderController);
+ordersRoutes.delete('/:orderId', (req, res) => {
+  return cancelOrderController.handle(req, res);
+});

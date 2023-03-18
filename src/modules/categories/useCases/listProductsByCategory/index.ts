@@ -1,8 +1,8 @@
-import { ProductsRepository } from '../../../products/repositories/ProductsRepository';
+import { ProductsRepository } from '../../../products/repositories/implementations/ProductsRepository';
 import { ListProductsByCategoryController } from './ListProductsByCategoryController';
 import { ListProductsByCategoryService } from './ListProductsByCategoryService';
 
-const productsRepository = new ProductsRepository();
+const productsRepository = ProductsRepository.getInstance();
 const listProductsByCategoryService = new ListProductsByCategoryService(
   productsRepository
 );
