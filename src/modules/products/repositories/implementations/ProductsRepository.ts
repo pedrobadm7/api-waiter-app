@@ -18,6 +18,14 @@ export class ProductsRepository implements IProductsRepository {
     return product;
   }
 
+  async findProductByName(name: string): Promise<IProductList | null> {
+    const product = Product.findOne({
+      name: { $regex: name, $options: 'i' },
+    });
+
+    return product;
+  }
+
   async create({
     name,
     description,

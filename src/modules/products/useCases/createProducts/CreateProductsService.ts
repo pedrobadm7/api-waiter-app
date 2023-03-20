@@ -16,6 +16,29 @@ class CreateProductsService {
     category,
     ingredients,
   }: IProductList): Promise<IProductList> {
+    const productAlreadyExists =
+      await this.productsRepository.findProductByName(name);
+
+    if (productAlreadyExists) {
+      throw new Error('Product already exists!');
+    }
+
+    if (!name) {
+      throw new Error('Name is required');
+    }
+
+    if (!description) {
+      throw new Error('Description is required');
+    }
+
+    if (!price) {
+      throw new Error('Price is required');
+    }
+
+    if (!category) {
+      throw new Error('Category is required');
+    }
+
     const product = await this.productsRepository.create({
       name,
       description,

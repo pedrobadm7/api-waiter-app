@@ -23,4 +23,5 @@ export interface IProductsRepository {
     ingredients,
   }: IProductList): Promise<IProductList>;
   list(): Promise<IProductList[]>;
+  findProductByName(name: string): Promise<IProductList | null>;
 }
