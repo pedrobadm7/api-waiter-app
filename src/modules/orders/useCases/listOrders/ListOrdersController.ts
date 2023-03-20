@@ -4,7 +4,7 @@ import { ListOrdersService } from './ListOrdersService';
 class ListOrdersController {
   constructor(private listOrdersService: ListOrdersService) {}
 
-  async handle(req: Request, res: Response) {
+  async handle(req: Request, res: Response): Promise<Response> {
     const orders = await this.listOrdersService.execute();
 
     try {

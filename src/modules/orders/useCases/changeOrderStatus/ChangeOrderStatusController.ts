@@ -4,7 +4,7 @@ import { ChangeOrderStatusService } from './ChangeOrderStatusService';
 class ChangeOrderStatusController {
   constructor(private changeOrderStatusService: ChangeOrderStatusService) {}
 
-  async handle(req: Request, res: Response) {
+  async handle(req: Request, res: Response): Promise<Response> {
     try {
       const { orderId } = req.params;
       const { status } = req.body;

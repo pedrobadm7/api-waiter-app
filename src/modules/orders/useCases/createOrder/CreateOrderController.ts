@@ -3,7 +3,7 @@ import { CreateOrderService } from './CreateOrderService';
 class CreateOrderController {
   constructor(private createOrderService: CreateOrderService) {}
 
-  async handle(req: Request, res: Response) {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { table, products } = req.body;
 
     const order = await this.createOrderService.execute(table, products);
