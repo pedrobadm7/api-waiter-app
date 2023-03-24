@@ -3,7 +3,8 @@ import http from 'node:http';
 import express from 'express';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
-
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger.json';
 import * as dotenv from 'dotenv';
 import { router } from './routes';
 
@@ -29,7 +30,11 @@ mongoose
       '/uploads',
       express.static(path.resolve(__dirname, '..', 'uploads'))
     );
+
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
     app.use(express.json());
+
     app.use(router);
 
     server.listen(3001, () => {

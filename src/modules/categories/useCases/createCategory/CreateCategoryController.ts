@@ -9,7 +9,7 @@ class CreateCategoryController {
 
     try {
       this.createCategoryService.execute({ name, icon });
-      return res.status(200).send();
+      return res.status(201).send();
     } catch {
       console.log('aqui');
       return res.sendStatus(500);
