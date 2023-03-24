@@ -1,14 +1,13 @@
 import { Router } from 'express';
 import { uploadImage } from '../middleware/uploadImage';
-import { createProductsController } from '../modules/products/useCases/createProducts';
-import { listProductsController } from '../modules/products/useCases/listProducts';
+import { CreateProductController } from '../modules/products/useCases/createProducts/CreateProductsController';
+import { ListProductsController } from '../modules/products/useCases/listProducts/ListProductsController';
 
 export const productsRoutes = Router();
 
-productsRoutes.get('/', (req, res) => {
-  return listProductsController.handle(req, res);
-});
+const createProductsController = new CreateProductController();
+const listProductsController = new ListProductsController();
 
-productsRoutes.post('/', uploadImage, (req, res) => {
-  return createProductsController.handle(req, res);
-});
+productsRoutes.get('/', listProductsController.handle);
+
+productsRoutes.post('/', uploadImage, createProductsController.handle);

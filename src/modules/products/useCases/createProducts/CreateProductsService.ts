@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { inject, injectable } from 'tsyringe';
 import {
   IProductList,
   IProductsRepository,
 } from '../../repositories/IProductsRepository';
 
+@injectable()
 class CreateProductsService {
-  constructor(private productsRepository: IProductsRepository) {}
+  constructor(
+    @inject('ProductsRepository')
+    private productsRepository: IProductsRepository
+  ) {}
 
   async execute({
     name,
