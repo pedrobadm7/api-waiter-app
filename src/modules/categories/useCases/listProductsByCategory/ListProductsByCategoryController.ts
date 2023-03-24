@@ -1,18 +1,16 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { ListProductsByCategoryService } from './ListProductsByCategoryService';
 
 class ListProductsByCategoryController {
-  constructor(
-    private listProductsByCategoryService: ListProductsByCategoryService
-  ) {}
-
   async handle(req: Request, res: Response): Promise<Response> {
+    const listProductsByCategoryService = container.resolve(
+      ListProductsByCategoryService
+    );
     try {
       const { categoryId } = req.params;
 
-      const products = await this.listProductsByCategoryService.execute(
-        categoryId
-      );
+      const products = await listProductsByCategoryService.execute(categoryId);
 
       return res.json(products);
     } catch {
