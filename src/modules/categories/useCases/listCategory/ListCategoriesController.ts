@@ -9,7 +9,7 @@ class ListCategoriesController {
     try {
       const categories = await this.listCategoriesService.execute();
 
-      return res.json(categories);
+      return res.status(200).json(categories);
     } catch {
       return res.sendStatus(500);
     }
