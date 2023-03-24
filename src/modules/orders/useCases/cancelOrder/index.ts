@@ -2,7 +2,7 @@ import { OrderRepository } from '../../repositories/implementations/OrdersReposi
 import { CancelOrderController } from './CancelOrderController';
 import { CancelOrderService } from './CancelOrderService';
 
-const orderRepository = OrderRepository.getInstance();
+const orderRepository = new OrderRepository();
 const cancelOrderService = new CancelOrderService(orderRepository);
 const cancelOrderController = new CancelOrderController(cancelOrderService);
 

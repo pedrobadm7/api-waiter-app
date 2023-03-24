@@ -4,14 +4,6 @@ import { IProductList, IProductsRepository } from '../IProductsRepository';
 export class ProductsRepository implements IProductsRepository {
   private static INSTANCE: ProductsRepository;
 
-  public static getInstance() {
-    if (!ProductsRepository.INSTANCE) {
-      ProductsRepository.INSTANCE = new ProductsRepository();
-    }
-
-    return ProductsRepository.INSTANCE;
-  }
-
   async listByCategory(categoryId: string): Promise<IProductList[]> {
     const product = await Product.find().where('category').equals(categoryId);
 

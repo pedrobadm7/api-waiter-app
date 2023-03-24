@@ -5,14 +5,6 @@ import { IRestaurant, IRestaurantsRepository } from '../IRestaurantsRepository';
 export class RestaurantsRepository implements IRestaurantsRepository {
   private static INSTANCE: RestaurantsRepository;
 
-  public static getInstance(): RestaurantsRepository {
-    if (!RestaurantsRepository.INSTANCE) {
-      RestaurantsRepository.INSTANCE = new RestaurantsRepository();
-    }
-
-    return RestaurantsRepository.INSTANCE;
-  }
-
   async findById(id: string): Promise<IRestaurant | null> {
     const restaurant = await Restaurant.findById(id, '-password');
 

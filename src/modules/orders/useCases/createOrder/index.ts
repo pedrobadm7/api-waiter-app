@@ -3,7 +3,7 @@ import { OrderRepository } from '../../repositories/implementations/OrdersReposi
 import { CreateOrderController } from './CreateOrderController';
 import { CreateOrderService } from './CreateOrderService';
 
-const ordersRepository = OrderRepository.getInstance();
+const ordersRepository = new OrderRepository();
 const socketIoProvider = new SocketIoProvider();
 const createOrderService = new CreateOrderService(
   ordersRepository,

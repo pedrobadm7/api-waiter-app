@@ -2,7 +2,7 @@ import { OrderRepository } from '../../repositories/implementations/OrdersReposi
 import { ChangeOrderStatusController } from './ChangeOrderStatusController';
 import { ChangeOrderStatusService } from './ChangeOrderStatusService';
 
-const ordersRepository = OrderRepository.getInstance();
+const ordersRepository = new OrderRepository();
 const changeOrderStatusService = new ChangeOrderStatusService(ordersRepository);
 const changeOrderStatusController = new ChangeOrderStatusController(
   changeOrderStatusService

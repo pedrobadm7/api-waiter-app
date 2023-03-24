@@ -4,7 +4,7 @@ import { RegisterRestaurantController } from './RegisterRestaurantController';
 
 import { RegisterRestaurantService } from './RegisterRestaurantService';
 
-const restaurantsRepository = RestaurantsRepository.getInstance();
+const restaurantsRepository = new RestaurantsRepository();
 const bcryptProvider = new BcryptProvider();
 const registerRestaurantService = new RegisterRestaurantService(
   restaurantsRepository,

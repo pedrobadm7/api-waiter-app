@@ -4,7 +4,7 @@ import { RestaurantsRepository } from '../../repositories/implementations/Restau
 import { LoginRestaurantController } from './LoginRestaurantController';
 import { LoginRestaurantService } from './LoginRestaurantService';
 
-const restaurantRepository = RestaurantsRepository.getInstance();
+const restaurantRepository = new RestaurantsRepository();
 const bcryptProvider = new BcryptProvider();
 const jsonWebTokenProvider = new JsonWebTokenProvider();
 const loginRestaurantService = new LoginRestaurantService(

@@ -9,14 +9,6 @@ import {
 export class CategoriesRepository implements ICategoriesRepository {
   private static INSTANCE: CategoriesRepository;
 
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-
-    return CategoriesRepository.INSTANCE;
-  }
-
   async create({ name, icon }: ICreateCategoryDTO): Promise<void> {
     const category = await CategoryModel.create({
       icon,

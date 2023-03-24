@@ -2,7 +2,7 @@ import { RestaurantsRepository } from '../../repositories/implementations/Restau
 import { GetRestaurantByIdController } from './GetRestaurantByIdController';
 import { GetRestaurantByIdService } from './GetRestaurantByIdService';
 
-const restaurantsRepository = RestaurantsRepository.getInstance();
+const restaurantsRepository = new RestaurantsRepository();
 const getRestaurantByIdService = new GetRestaurantByIdService(
   restaurantsRepository
 );
