@@ -1,11 +1,11 @@
-import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
-import { CreateCategoryController } from './CreateCategoryController';
-import { CreateCategoryService } from './CreateCategoryService';
+// import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
+// import { CreateCategoryController } from './CreateCategoryController';
+// import { CreateCategoryService } from './CreateCategoryService';
 
-const categoriesRepository = new CategoriesRepository();
-const createCategoryService = new CreateCategoryService(categoriesRepository);
-const createCategoryController = new CreateCategoryController(
-  createCategoryService
-);
+// const categoriesRepository = new CategoriesRepository();
+// const createCategoryService = new CreateCategoryService(categoriesRepository);
+// const createCategoryController = new CreateCategoryController(
+//   createCategoryService
+// );
 
-export { createCategoryController };
+// export { createCategoryController };

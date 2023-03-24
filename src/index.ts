@@ -1,5 +1,6 @@
 import path from 'node:path';
 import http from 'node:http';
+import 'reflect-metadata';
 import express from 'express';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
@@ -7,6 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
 import * as dotenv from 'dotenv';
 import { router } from './routes';
+import './shared/container';
 
 dotenv.config();
 
