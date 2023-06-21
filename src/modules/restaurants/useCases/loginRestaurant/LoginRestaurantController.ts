@@ -9,7 +9,7 @@ class LoginRestaurantController {
 
       const token = await this.loginRestaurantService.execute(email, password);
 
-      return res.status(200).json(token);
+      return res.status(200).json({token});
     } catch {
       return res.sendStatus(500);
     }
