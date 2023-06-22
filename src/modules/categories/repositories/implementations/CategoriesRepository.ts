@@ -7,7 +7,6 @@ import {
 } from '../ICategoriesRepository';
 
 export class CategoriesRepository implements ICategoriesRepository {
-  private static INSTANCE: CategoriesRepository;
 
   async create({ name, icon }: ICreateCategoryDTO): Promise<void> {
     const category = await CategoryModel.create({
