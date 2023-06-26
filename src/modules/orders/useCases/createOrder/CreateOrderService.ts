@@ -1,11 +1,14 @@
+import { inject, injectable } from 'tsyringe';
 import { SocketIoProvider } from '../../../../providers/socketio-provider';
 import {
   IOrder,
   IOrdersRepository,
 } from '../../repositories/IOrdersRepository';
 
+@injectable()
 class CreateOrderService {
   constructor(
+    @inject('OrderRepository')
     private ordersRepository: IOrdersRepository,
     private socketIoProvider: SocketIoProvider
   ) {}
