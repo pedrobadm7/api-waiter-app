@@ -1,11 +1,14 @@
+import { inject, injectable } from 'tsyringe';
 import { BcryptProvider } from '../../../../providers/bcrypt-provider';
 import {
   IRestaurant,
   IRestaurantsRepository,
 } from '../../repositories/IRestaurantsRepository';
 
+@injectable()
 class RegisterRestaurantService {
   constructor(
+    @inject('RestaurantsRepository')
     private restaurantsRepository: IRestaurantsRepository,
     private bcryptProvider: BcryptProvider
   ) {}

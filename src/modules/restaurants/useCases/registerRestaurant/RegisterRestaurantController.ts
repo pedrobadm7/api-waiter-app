@@ -1,13 +1,15 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { RegisterRestaurantService } from './RegisterRestaurantService';
 
 class RegisterRestaurantController {
-  constructor(private registerRestaurantService: RegisterRestaurantService) {}
+
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { name, email, password, confirmpassword } = req.body;
 
-    const restaurant = await this.registerRestaurantService.execute({
+    const registerRestaurantService = container.resolve(RegisterRestaurantService)
+    const restaurant = await registerRestaurantService.execute({
       restaurantName: name,
       email,
       password,

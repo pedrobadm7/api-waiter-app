@@ -1,9 +1,12 @@
+import { inject, injectable } from 'tsyringe';
 import { BcryptProvider } from '../../../../providers/bcrypt-provider';
 import { JsonWebTokenProvider } from '../../../../providers/jsonwebtoken-provider';
 import { IRestaurantsRepository } from '../../repositories/IRestaurantsRepository';
 
+@injectable()
 class LoginRestaurantService {
   constructor(
+    @inject('RestaurantsRepository')
     private restaurantsRepository: IRestaurantsRepository,
     private bcryptProvider: BcryptProvider,
     private jsonWebTokenProvider: JsonWebTokenProvider
