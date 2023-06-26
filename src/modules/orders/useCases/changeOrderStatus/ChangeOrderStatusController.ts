@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { ChangeOrderStatusService } from './ChangeOrderStatusService';
+import { container } from 'tsyringe';
 
 class ChangeOrderStatusController {
-  constructor(private changeOrderStatusService: ChangeOrderStatusService) {}
-
   async handle(req: Request, res: Response): Promise<Response> {
     try {
+      const changeOrderStatusService = container.resolve(ChangeOrderStatusService)
       const { orderId } = req.params;
       const { status } = req.body;
 
-      await this.changeOrderStatusService.execute(orderId, status);
+      await changeOrderStatusService.execute(orderId, status);
 
       return res.sendStatus(204);
     } catch {
