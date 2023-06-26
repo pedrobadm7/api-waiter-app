@@ -1,7 +1,12 @@
+import { inject, injectable } from 'tsyringe';
 import { IOrdersRepository } from '../../repositories/IOrdersRepository';
 
+@injectable()
 class CancelOrderService {
-  constructor(private ordersRepository: IOrdersRepository) {}
+  constructor(
+    @inject('OrderRepository')
+    private ordersRepository: IOrdersRepository
+    ) {}
 
   async execute(orderId: string) {
     const order = await this.ordersRepository.findOrderById(orderId);
