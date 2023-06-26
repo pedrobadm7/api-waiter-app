@@ -2,13 +2,14 @@ import { Router } from 'express';
 import { cancelOrderController } from '../modules/orders/useCases/cancelOrder';
 import { changeOrderStatusController } from '../modules/orders/useCases/changeOrderStatus';
 import { createOrderController } from '../modules/orders/useCases/createOrder';
-import { listOrdersController } from '../modules/orders/useCases/listOrders';
+
+import { ListOrdersController } from '../modules/orders/useCases/listOrders/ListOrdersController';
+
+const listOrdersController = new ListOrdersController()
 
 export const ordersRoutes = Router();
 
-ordersRoutes.get('/', (req, res) => {
-  return listOrdersController.handle(req, res);
-});
+ordersRoutes.get('/', listOrdersController.handle);
 
 ordersRoutes.post('/', (req, res) => {
   return createOrderController.handle(req, res);
