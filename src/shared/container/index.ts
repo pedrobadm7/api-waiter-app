@@ -5,6 +5,8 @@ import { ProductsRepository } from '../../modules/products/repositories/implemen
 import { IProductsRepository } from '../../modules/products/repositories/IProductsRepository';
 import { IOrdersRepository } from '../../modules/orders/repositories/IOrdersRepository';
 import { OrderRepository } from '../../modules/orders/repositories/implementations/OrdersRepository';
+import { IRestaurantsRepository } from '../../modules/restaurants/repositories/IRestaurantsRepository';
+import { RestaurantsRepository } from '../../modules/restaurants/repositories/implementations/RestaurantsRepository';
 
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
@@ -19,4 +21,9 @@ container.registerSingleton<IProductsRepository>(
 container.registerSingleton<IOrdersRepository>(
   'OrderRepository',
   OrderRepository
+)
+
+container.registerSingleton<IRestaurantsRepository>(
+  'RestaurantsRepository',
+  RestaurantsRepository
 )
