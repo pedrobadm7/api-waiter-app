@@ -21,9 +21,9 @@ container.registerSingleton<IProductsRepository>(
 container.registerSingleton<IOrdersRepository>(
   'OrderRepository',
   OrderRepository
-)
+);
 
 container.registerSingleton<IRestaurantsRepository>(
   'RestaurantsRepository',
   RestaurantsRepository
-)
+);
