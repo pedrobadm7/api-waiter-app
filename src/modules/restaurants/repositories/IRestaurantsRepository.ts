@@ -12,8 +12,9 @@ export interface IRestaurantsRepository {
   findRestaurant(email: string): Promise<IRestaurant | null>;
   getIdByEmail(email: string): Promise<Types.ObjectId | undefined>;
   createRestaurant(
-    name: string,
     email: string,
-    password: string
+    password: string,
+    name: string,
+    products: string[] | null,
   ): Promise<IRestaurant>;
 }

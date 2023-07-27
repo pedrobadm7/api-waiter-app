@@ -18,11 +18,13 @@ class RegisterRestaurantService {
     email,
     password,
     confirmpassword,
+    products
   }: {
     restaurantName: string;
     email: string;
     password: string;
     confirmpassword: string;
+    products: string[]
   }): Promise<IRestaurant> {
     if (!restaurantName) {
       throw new Error('You must provide a restaurant name');
@@ -57,7 +59,8 @@ class RegisterRestaurantService {
     const restaurant = await this.restaurantsRepository.createRestaurant(
       restaurantName,
       email,
-      passwordHash
+      passwordHash,
+      products
     );
 
     return restaurant;

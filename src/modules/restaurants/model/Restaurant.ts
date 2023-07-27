@@ -21,9 +21,5 @@ export const Restaurant = model(
         ref: 'Product',
       },
     ],
-    orders: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Order'
-    }]
   })
 );

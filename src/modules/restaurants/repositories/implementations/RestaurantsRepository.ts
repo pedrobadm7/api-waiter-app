@@ -3,7 +3,6 @@ import { Restaurant } from '../../model/Restaurant';
 import { IRestaurant, IRestaurantsRepository } from '../IRestaurantsRepository';
 
 export class RestaurantsRepository implements IRestaurantsRepository {
-  private static INSTANCE: RestaurantsRepository;
 
   async findById(id: string): Promise<IRestaurant | null> {
     const restaurant = await Restaurant.findById(id, '-password');
@@ -27,15 +26,18 @@ export class RestaurantsRepository implements IRestaurantsRepository {
   async createRestaurant(
     name: string,
     email: string,
-    password: string
+    password: string,
+    products: string[],
   ): Promise<IRestaurant> {
     const restaurant = await Restaurant.create({
       name: name,
       email: email,
       password: password,
+      products: products,
     });
 
     await restaurant.save();
+
     return restaurant;
   }
 }

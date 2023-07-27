@@ -4,16 +4,16 @@ import { RegisterRestaurantService } from './RegisterRestaurantService';
 
 class RegisterRestaurantController {
 
-
   async handle(req: Request, res: Response): Promise<Response> {
-    const { name, email, password, confirmpassword } = req.body;
+    const { name, email, password, confirmpassword, products } = req.body;
 
-    const registerRestaurantService = container.resolve(RegisterRestaurantService)
+    const registerRestaurantService = container.resolve(RegisterRestaurantService);
     const restaurant = await registerRestaurantService.execute({
       restaurantName: name,
       email,
       password,
       confirmpassword,
+      products,
     });
 
     try {
